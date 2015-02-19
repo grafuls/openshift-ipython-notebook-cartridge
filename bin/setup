@@ -8,8 +8,8 @@ case "$1" in
 esac
 
 # Update environment
-source $OPENSHIFT_ADVANCED_PYTHON_DIR/usr/python/versions/$version/lib/update-configuration
+source $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/usr/python/versions/$version/lib/update-configuration
 update-configuration
 
 # Call the version specific setup script
-exec $OPENSHIFT_ADVANCED_PYTHON_DIR/usr/python/versions/$version/bin/setup $version
+exec $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/usr/python/versions/$version/bin/setup $version

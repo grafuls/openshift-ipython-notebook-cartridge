@@ -2,7 +2,7 @@
 
 # Utility function to create virtual environments
 
-venv_dir=$OPENSHIFT_ADVANCED_PYTHON_DIR/virtenv/venv
+venv_dir=$OPENSHIFT_IPYTHON_NOTEBOOK_DIR/virtenv/venv
 
 function relative-virtenv {
   pushd "$venv_dir" > /dev/null
@@ -34,7 +34,7 @@ function install_setup_tools() {
   # Activate virtual env.
   source bin/activate
   # Run distribute_setup.
-  python ${OPENSHIFT_ADVANCED_PYTHON_DIR}/usr/python/versions/3.3/lib/distribute_setup.py
+  python ${OPENSHIFT_IPYTHON_NOTEBOOK_DIR}/usr/python/versions/3.3/lib/distribute_setup.py
   
   # Activate virtual env so as to get access to easy_install and install pip.
   source bin/activate

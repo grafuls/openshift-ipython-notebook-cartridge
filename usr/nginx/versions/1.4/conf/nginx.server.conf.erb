@@ -1,5 +1,5 @@
 server {
-    listen  <%= ENV['OPENSHIFT_ADVANCED_PYTHON_IP'] %>:<%= ENV['OPENSHIFT_ADVANCED_PYTHON_PORT'] %>;
+    listen  <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_IP'] %>:<%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_PORT'] %>;
     root    <%= ENV['OPENSHIFT_REPO_DIR'] %>public;
 
     server_name _;

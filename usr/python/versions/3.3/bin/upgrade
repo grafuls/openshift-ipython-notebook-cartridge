@@ -6,8 +6,8 @@ python_version="$1"
 old_cart_version="$2"
 new_cart_version="$3"
 
-source $OPENSHIFT_ADVANCED_PYTHON_DIR/usr/python/versions/$python_version/lib/update-configuration
-source $OPENSHIFT_ADVANCED_PYTHON_DIR/usr/python/versions/$python_version/lib/python-context
+source $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/usr/python/versions/$python_version/lib/update-configuration
+source $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/usr/python/versions/$python_version/lib/python-context
 
 # Switch to SCL environment
 case "$old_cart_version" in
@@ -16,21 +16,21 @@ case "$old_cart_version" in
         # Construct a listing of the old virtual env as an aid in
         # reconstruction if there is a problem.  Two steps to allow
         # a complete re-do if there's a failure.
-        if ! [ -e "$OPENSHIFT_ADVANCED_PYTHON_DIR/old-virtenv-files.txt.gz" ]
+        if ! [ -e "$OPENSHIFT_IPYTHON_NOTEBOOK_DIR/old-virtenv-files.txt.gz" ]
         then
-            (cd $OPENSHIFT_ADVANCED_PYTHON_DIR/virtenv; find -print) | \
-                gzip -9 -c > $OPENSHIFT_ADVANCED_PYTHON_DIR/old-virtenv-files.txt.gz.new
-            mv -f $OPENSHIFT_ADVANCED_PYTHON_DIR/old-virtenv-files.txt.gz.new $OPENSHIFT_ADVANCED_PYTHON_DIR/old-virtenv-files.txt.gz
+            (cd $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/virtenv; find -print) | \
+                gzip -9 -c > $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/old-virtenv-files.txt.gz.new
+            mv -f $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/old-virtenv-files.txt.gz.new $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/old-virtenv-files.txt.gz
         fi
 
         # Past this point, the application is not functional if there
         # is a failure but retry is possible.
-        rm -rf $OPENSHIFT_ADVANCED_PYTHON_DIR/opt
-        rm -rf $OPENSHIFT_ADVANCED_PYTHON_DIR/versions
-        rm -rf $OPENSHIFT_ADVANCED_PYTHON_DIR/virtenv/*
+        rm -rf $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/opt
+        rm -rf $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/versions
+        rm -rf $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/virtenv/*
 
         # Need the environment ERBs rendered at this point
-        for f in $OPENSHIFT_ADVANCED_PYTHON_DIR/env/*.erb; do
+        for f in $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/env/*.erb; do
             if [ -f "$f" ]; then
                 d=$(basename "$f" .erb)
                 /usr/bin/oo-erb -S 2 -- "$f" > "$d"
@@ -43,14 +43,14 @@ case "$old_cart_version" in
 
         # Rebuild the virtenv
         python-context-stdin <<EOF
-source $OPENSHIFT_ADVANCED_PYTHON_DIR/usr/python/versions/$python_version/lib/create-virtenv
+source $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/usr/python/versions/$python_version/lib/create-virtenv
 create-virtenv
 EOF
 
         # Rebuild the application using the new gear environment
         oo-trap-user <<EOF
-        $OPENSHIFT_ADVANCED_PYTHON_DIR/bin/control build
-        $OPENSHIFT_ADVANCED_PYTHON_DIR/bin/control deploy
+        $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/bin/control build
+        $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/bin/control deploy
 EOF
 
         ;;

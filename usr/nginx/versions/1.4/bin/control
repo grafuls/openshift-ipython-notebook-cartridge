@@ -10,10 +10,10 @@ if [ ! $OPENSHIFT_PYTHON_SERVER ]; then
 fi
 
 
-NGINX_EXEC=$OPENSHIFT_ADVANCED_PYTHON_DIR/usr/nginx/versions/$NGINX_VERSION/bin/nginx
-NGINX_CONFIG_TEMPLATE_DIR=$OPENSHIFT_ADVANCED_PYTHON_DIR/usr/nginx/versions/$NGINX_VERSION/conf
-NGINX_CONFIG_FILE=$OPENSHIFT_ADVANCED_PYTHON_DIR/conf/nginx.conf
-NGINX_PID_FILE=$OPENSHIFT_ADVANCED_PYTHON_DIR/run/nginx.pid
+NGINX_EXEC=$OPENSHIFT_IPYTHON_NOTEBOOK_DIR/usr/nginx/versions/$NGINX_VERSION/bin/nginx
+NGINX_CONFIG_TEMPLATE_DIR=$OPENSHIFT_IPYTHON_NOTEBOOK_DIR/usr/nginx/versions/$NGINX_VERSION/conf
+NGINX_CONFIG_FILE=$OPENSHIFT_IPYTHON_NOTEBOOK_DIR/conf/nginx.conf
+NGINX_PID_FILE=$OPENSHIFT_IPYTHON_NOTEBOOK_DIR/run/nginx.pid
 
 
 function start() {
@@ -56,7 +56,7 @@ function restart() {
 
 function status() {
     res=0
-    output=$(curl -s -m 30 http://$OPENSHIFT_ADVANCED_PYTHON_IP:$OPENSHIFT_ADVANCED_PYTHON_PORT/ &> /dev/null) || res=1
+    output=$(curl -s -m 30 http://$OPENSHIFT_IPYTHON_NOTEBOOK_IP:$OPENSHIFT_IPYTHON_NOTEBOOK_PORT/ &> /dev/null) || res=1
 
     if [ $res -eq 0 ]
     then
@@ -83,7 +83,7 @@ function reload() {
 
 
 function tidy() {
-    client_message "Emptying Nginx logs in: $OPENSHIFT_ADVANCED_PYTHON_DIR/logs"
+    client_message "Emptying Nginx logs in: $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/logs"
     rm logs/nginx.log
     rm logs/access.log
     rm logs/error.log

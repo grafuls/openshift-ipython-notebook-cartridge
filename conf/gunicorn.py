@@ -1,7 +1,7 @@
 import os
 import multiprocessing
 
-cart_dir = os.environ["OPENSHIFT_ADVANCED_PYTHON_DIR"]
+cart_dir = os.environ["OPENSHIFT_IPYTHON_NOTEBOOK_DIR"]
 tmp_dir = os.environ["OPENSHIFT_TMP_DIR"]
 
 

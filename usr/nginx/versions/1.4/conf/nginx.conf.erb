@@ -1,5 +1,5 @@
-error_log  <%= ENV['OPENSHIFT_ADVANCED_PYTHON_DIR'] %>logs/error.log;
-pid        <%= ENV['OPENSHIFT_ADVANCED_PYTHON_DIR'] %>run/nginx.pid;
+error_log  <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_DIR'] %>logs/error.log;
+pid        <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_DIR'] %>run/nginx.pid;
 
 worker_processes 1;
 
@@ -14,7 +14,7 @@ http {
     default_type  application/octet-stream;
 
     upstream ipython_server{
-        server <%= ENV['OPENSHIFT_ADVANCED_PYTHON_IP'] %>:<%= ENV['OPENSHIFT_ADVANCED_PYTHON_PORT'] %>
+        server <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_IP'] %>:<%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_PORT'] %>
     }
 
     server {
@@ -36,7 +36,7 @@ http {
                       '$status $body_bytes_sent "$http_referer" '
                       '"$http_user_agent" "$http_x_forwarded_for"';
 
-    access_log  <%= ENV['OPENSHIFT_ADVANCED_PYTHON_DIR'] %>logs/access.log  main;
+    access_log  <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_DIR'] %>logs/access.log  main;
 
     sendfile  on;
     gzip      on;
@@ -50,6 +50,6 @@ http {
     }
 
 
-    include  <%= ENV['OPENSHIFT_ADVANCED_PYTHON_DIR'] %>conf/nginx.appserver.conf;
-    include  <%= ENV['OPENSHIFT_ADVANCED_PYTHON_DIR'] %>conf/nginx.server.conf;
+    include  <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_DIR'] %>conf/nginx.appserver.conf;
+    include  <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_DIR'] %>conf/nginx.server.conf;
 }

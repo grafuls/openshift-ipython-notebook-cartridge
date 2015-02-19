@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
-source "${OPENSHIFT_ADVANCED_PYTHON_DIR}/usr/python/versions/${OPENSHIFT_ADVANCED_PYTHON_VERSION}/lib/create-virtenv"
+source "${OPENSHIFT_IPYTHON_NOTEBOOK_DIR}/usr/python/versions/${OPENSHIFT_IPYTHON_NOTEBOOK_VERSION}/lib/create-virtenv"
 
 
 # default python server
@@ -12,17 +12,17 @@ fi
 
 
 function start_wsgiref() {
-    nohup python usr/python/versions/2.7/servers/wsgiref_server.py > "$OPENSHIFT_ADVANCED_PYTHON_DIR/logs/appserver.log" 2>&1 &
-    echo $! > $OPENSHIFT_ADVANCED_PYTHON_DIR/run/appserver.pid
+    nohup python usr/python/versions/2.7/servers/wsgiref_server.py > "$OPENSHIFT_IPYTHON_NOTEBOOK_DIR/logs/appserver.log" 2>&1 &
+    echo $! > $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/run/appserver.pid
 }
 
 function start_gevent() {
-    nohup python usr/python/versions/2.7/servers/gevent_server.py > "$OPENSHIFT_ADVANCED_PYTHON_DIR/logs/appserver.log" 2>&1 &
-    echo $! > $OPENSHIFT_ADVANCED_PYTHON_DIR/run/appserver.pid
+    nohup python usr/python/versions/2.7/servers/gevent_server.py > "$OPENSHIFT_IPYTHON_NOTEBOOK_DIR/logs/appserver.log" 2>&1 &
+    echo $! > $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/run/appserver.pid
 }
 
 function start_gunicorn() {
-    nohup gunicorn -c $OPENSHIFT_ADVANCED_PYTHON_DIR/conf/gunicorn.py app:application > "$OPENSHIFT_ADVANCED_PYTHON_DIR/logs/appserver.log" 2>&1
+    nohup gunicorn -c $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/conf/gunicorn.py app:application > "$OPENSHIFT_IPYTHON_NOTEBOOK_DIR/logs/appserver.log" 2>&1
 }
 
 
@@ -56,9 +56,9 @@ function start() {
 function stop() {
     echo "Stopping PYTHON cart"
 
-    if [ -s $OPENSHIFT_ADVANCED_PYTHON_DIR/run/appserver.pid ]
+    if [ -s $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/run/appserver.pid ]
     then
-        kpid=$(cat $OPENSHIFT_ADVANCED_PYTHON_DIR/run/appserver.pid)
+        kpid=$(cat $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/run/appserver.pid)
         iters=0
         while kill $kpid >/dev/null 2>&1
         do
@@ -67,10 +67,10 @@ function stop() {
             sleep 1
         done
         kill -KILL $kpid >/dev/null 2>&1 || :
-        rm -f $OPENSHIFT_ADVANCED_PYTHON_DIR/run/appserver.pid
+        rm -f $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/run/appserver.pid
 
-        if [ -S $OPENSHIFT_ADVANCED_PYTHON_DIR/run/appserver.sock ]; then
-            rm -f $OPENSHIFT_ADVANCED_PYTHON_DIR/run/appserver.sock
+        if [ -S $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/run/appserver.sock ]; then
+            rm -f $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/run/appserver.sock
         fi
     fi
 }
@@ -84,7 +84,7 @@ function restart() {
 
 function status() {
     res=0
-    output=$(curl -s -m 30 http://$OPENSHIFT_ADVANCED_PYTHON_IP:$OPENSHIFT_ADVANCED_PYTHON_PORT/ &> /dev/null) || res=1
+    output=$(curl -s -m 30 http://$OPENSHIFT_IPYTHON_NOTEBOOK_IP:$OPENSHIFT_IPYTHON_NOTEBOOK_PORT/ &> /dev/null) || res=1
 
     if [ $res -eq 0 ]
     then
@@ -102,7 +102,7 @@ function reload() {
 
 # Clean up any log files
 function tidy() {
-  client_message "Emptying python logs in: $OPENSHIFT_ADVANCED_PYTHON_DIR/logs"
+  client_message "Emptying python logs in: $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/logs"
   rm logs/appserver.log
   rm logs/appserver.*.log
 }

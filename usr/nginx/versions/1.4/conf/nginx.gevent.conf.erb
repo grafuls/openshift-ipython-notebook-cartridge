@@ -1,3 +1,3 @@
 upstream appserver {
-    server unix:<%= ENV['OPENSHIFT_ADVANCED_PYTHON_DIR'] %>run/appserver.sock fail_timeout=0;
+    server unix:<%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_DIR'] %>run/appserver.sock fail_timeout=0;
 }

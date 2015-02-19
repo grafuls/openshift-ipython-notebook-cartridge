@@ -2,7 +2,7 @@
 
 python_version="$1"
 
-upgrade_script="$OPENSHIFT_ADVANCED_PYTHON_DIR/usr/python/versions/$python_version/bin/upgrade"
+upgrade_script="$OPENSHIFT_IPYTHON_NOTEBOOK_DIR/usr/python/versions/$python_version/bin/upgrade"
 
 
 if [ -e "$upgrade_script" ]
