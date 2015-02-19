@@ -1,0 +1,29 @@
+#!/bin/bash -e
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+
+NGINX_DIR=$OPENSHIFT_ADVANCED_PYTHON_DIR/usr/nginx/versions/$NGINX_VERSION
+PYTHON_DIR=$OPENSHIFT_ADVANCED_PYTHON_DIR/usr/python/versions/$OPENSHIFT_ADVANCED_PYTHON_VERSION
+
+
+case $1 in
+    update-configuration)
+        source $PYTHON_DIR/lib/update-configuration
+        update-configuration $PYTHON_VERSION
+        ;;
+    stop)
+        $NGINX_DIR/bin/control "$@"
+        $PYTHON_DIR/bin/control "$@"
+        ;;
+    restart)
+        $NGINX_DIR/bin/control "stop"
+        $PYTHON_DIR/bin/control "stop"
+        $PYTHON_DIR/bin/control "start"
+        $NGINX_DIR/bin/control "start"
+        ;;
+    *)
+        $PYTHON_DIR/bin/control "$@"
+        $NGINX_DIR/bin/control "$@"
+        ;;
+esac

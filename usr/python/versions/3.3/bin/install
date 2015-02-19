@@ -1,0 +1,19 @@
+#!/bin/bash -eu
+
+if [[ -d /usr/lib64 ]]; then
+  _libdir=/usr/lib64
+else
+  _libdir=/usr/lib
+fi
+
+version="$1"
+
+# The virtual environment is assumed to exist going forward
+if [ ! -f $OPENSHIFT_ADVANCED_PYTHON_DIR/virtenv/bin/python ]
+then
+    source $OPENSHIFT_ADVANCED_PYTHON_DIR/usr/python/versions/$version/lib/python-context
+    python-context-stdin <<EOF
+source $OPENSHIFT_ADVANCED_PYTHON_DIR/usr/python/versions/$version/lib/create-virtenv
+create-virtenv
+EOF
+fi

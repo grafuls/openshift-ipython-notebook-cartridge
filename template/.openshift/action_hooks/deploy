@@ -1,0 +1,15 @@
+#!/bin/bash
+
+mkdir $OPENSHIFT_DATA_DIR/notebooks
+
+country=CZ
+state=Jihomoravske
+locality=Brno
+organization=Pandevs
+organizationalunit=IT
+commonname=pandevs
+email=grafuls@gmail.com
+           
+openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout $OPENSHIFT_REPO_DIR/mycert.pem -out $OPENSHIFT_REPO_DIR/mycert.pem \
+             -subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
+

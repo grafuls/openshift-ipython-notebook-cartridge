@@ -1,0 +1,7 @@
+pyzmq
+tornado
+jinja2
+jsonschema
+terminado
+virtualenv
+ipdb

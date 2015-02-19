@@ -1,0 +1,67 @@
+Name: IPython Notebook
+Cartridge-Short-Name: IPYTHON_NOTEBOOK
+Display-Name: IPython Notebook
+Description: 'An IPython Notebook cartridge utilising an Nginx reverse proxy'
+Version: '2.7.9'
+Versions:
+- '2.7.9'
+- '3.3'
+License: The Python License, version 2.7
+License-Url: http://docs.python.org/3/license.html
+Vendor: python.org
+Cartridge-Version: 0.0.1
+Cartridge-Vendor: grafuls
+Categories:
+- service
+- python
+- web_framework
+Website: http://www.python.org
+Help-Topics:
+  Developer Center: https://www.openshift.com/developers
+Provides:
+- python-2.7.9
+- python
+- python(version) = 2.7.9
+Publishes: 
+Subscribes:
+  set-env:
+    Type: ENV:*
+    Required: false
+  set-doc-url:
+    Type: STRING:urlpath
+    Required: false
+Scaling:
+  Min: 1
+  Max: -1
+Endpoints:
+- Private-IP-Name: IP
+  Private-Port-Name: PORT
+  Private-Port: 8080
+  Public-Port-Name: PROXY_PORT
+  Protocols:
+  - http
+  - ws
+  Options:
+    primary: true
+  Mappings:
+  - Frontend: ''
+    Backend: ''
+    Options:
+      websocket: true
+  - Frontend: /health
+    Backend: ''
+    Options:
+      health: true
+Version-Overrides:
+  '3.3':
+    Display-Name: Advanced Python 3.3
+    License: The Python License, version 3.3
+    Provides:
+    - python-3.3
+    - python
+    - python(version) = 3.3
+    Categories:
+    - service
+    - python
+    - web_framework
+Install-Build-Required: false
