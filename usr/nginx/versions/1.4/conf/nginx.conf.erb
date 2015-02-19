@@ -39,7 +39,7 @@ http {
         listen  <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_IP'] %>:<%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_PORT'] %>;
         root    <%= ENV['OPENSHIFT_REPO_DIR'] %>public;
 
-        server_name _;
+        server_name ipython_notebook;
         keepalive_timeout 5;
 
         # haproxy health checks don't send any http_host headers
