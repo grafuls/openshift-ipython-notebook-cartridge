@@ -13,7 +13,7 @@ The official python cartridge uses Apache and mod_wsgi to serve your app which i
 
 To install this cartridge use the cartridge reflector when creating an app
 
-	rhc create-app myapp http://cartreflect-claytondev.rhcloud.com/reflect?github=grafuls/openshift-advanced-python-cartridge
+	rhc create-app myapp http://cartreflect-claytondev.rhcloud.com/reflect?github=grafuls/openshift-ipython-notebook-cartridge
 
 
 ### Usage
