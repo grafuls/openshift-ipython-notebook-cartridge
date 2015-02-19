@@ -23,9 +23,6 @@ function start() {
     oo-erb $NGINX_CONFIG_TEMPLATE_DIR/nginx.conf.erb > $NGINX_CONFIG_FILE
     oo-erb $NGINX_CONFIG_TEMPLATE_DIR/nginx.$OPENSHIFT_PYTHON_SERVER.conf.erb > conf/nginx.appserver.conf
 
-    echo $NGINX_CONFIG_FILE
-    echo $OPENSHIFT_PYTHON_SERVER.conf.erb
-
     # customised server configuration
     if [ -f $OPENSHIFT_REPO_DIR/nginx.conf.erb ]; then
         oo-erb $OPENSHIFT_REPO_DIR/nginx.conf.erb > conf/nginx.server.conf
