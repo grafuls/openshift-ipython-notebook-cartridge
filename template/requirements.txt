@@ -5,3 +5,4 @@ jsonschema
 terminado
 virtualenv
 ipdb
+ipython[all]
