@@ -36,7 +36,7 @@ http {
     }
 
     server {
-        listen  <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_IP'] %>:15000;
+        listen  <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_IP'] %>:15001;
         root    <%= ENV['OPENSHIFT_REPO_DIR'] %>public;
 
         server_name ipython_notebook;
