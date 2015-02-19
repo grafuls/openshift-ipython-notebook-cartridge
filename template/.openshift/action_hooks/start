@@ -2,4 +2,4 @@
 
 source $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/usr/python/versions/$version/bin/activate
 
-nohup ipython notebook --no-browser --debug --notebook-dir=$OPENSHIFT_DATA_DIR/notebooks --ip=$OPENSHIFT_IPYTHON_NOTEBOOK_IP --port=$OPENSHIFT_IPYTHON_NOTEBOOK_PORT --profile-dir=$OPENSHIFT_REPO_DIR/.ipython/profile_default --keyfile=$OPENSHIFT_DATA_DIR/mycert.pem >> $OPENSHIFT_IPYTHON_NOTEBOOK_LOG_DIR/notebook.log 2>&1 &
+nohup ipython notebook --no-browser --debug --notebook-dir=$OPENSHIFT_DATA_DIR/notebooks --ip=$OPENSHIFT_IPYTHON_NOTEBOOK_IP --port=$OPENSHIFT_IPYTHON_NOTEBOOK_PORT --profile-dir=$OPENSHIFT_REPO_DIR/.ipython/profile_default --keyfile=$OPENSHIFT_DATA_DIR/mycert.pem >> $OPENSHIFT_LOG_DIR/notebook.log 2>&1 &
