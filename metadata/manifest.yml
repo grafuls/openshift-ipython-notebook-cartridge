@@ -1,4 +1,4 @@
-Name: IPython Notebook
+Name: ipython-notebook
 Cartridge-Short-Name: IPYTHON_NOTEBOOK
 Display-Name: IPython Notebook
 Description: 'An IPython Notebook cartridge utilising an Nginx reverse proxy'
