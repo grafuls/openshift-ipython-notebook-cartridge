@@ -35,40 +35,6 @@ http {
         ''      close;
     }
 
-    server {
-        listen  <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_IP'] %>:15001;
-        root    <%= ENV['OPENSHIFT_REPO_DIR'] %>public;
-
-        server_name ipython_notebook;
-        keepalive_timeout 5;
-
-        # haproxy health checks don't send any http_host headers
-        # so we set the Host header to the app DNS if the header is empty.
-        # This is needed for frameworks that validate the Host header such as Django.
-        set $_host $http_host;
-        if ($http_host = "") {
-            set $_host "<%= ENV['OPENSHIFT_APP_DNS'] %>";
-        }
-
-        location / {
-            try_files $uri @proxy_to_app;
-        }
-
-        location @proxy_to_app {
-            # websocket support
-            proxy_http_version 1.1;
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection $connection_upgrade;
-
-            proxy_set_header Host $_host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_redirect off;
-
-            # the upstream 'appserver' always points to the selected python server
-            proxy_pass http://appserver;
-        }
-    }
 
     include  <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_DIR'] %>conf/nginx.appserver.conf;
     include  <%= ENV['OPENSHIFT_IPYTHON_NOTEBOOK_DIR'] %>conf/nginx.server.conf;
