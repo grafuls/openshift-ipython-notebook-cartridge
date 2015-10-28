@@ -10,10 +10,11 @@ esac
 
 echo "$version" > env/OPENSHIFT_IPYTHON_NOTEBOOK_VERSION
 echo "1.4" > env/NGINX_VERSION
+echo "/opt/rh/python27/root/usr/lib64/" > env/LD_LIBRARY_PATH
 
 
 for dir in logs run; do
-	mkdir -p $dir
+    mkdir -p $dir
 done
 
 # Call the version specific install script
