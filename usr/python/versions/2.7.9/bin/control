@@ -12,6 +12,7 @@ fi
 
 
 function start_gunicorn() {
+    echo "Starting gunicorn"
     nohup gunicorn -c $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/conf/gunicorn.py app:application > "$OPENSHIFT_IPYTHON_NOTEBOOK_DIR/logs/appserver.log" 2>&1
 }
 
