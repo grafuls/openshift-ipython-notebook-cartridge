@@ -13,7 +13,7 @@ if [ ! -f $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/virtenv/bin/python ]
 then
     source $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/usr/python/versions/$version/lib/python-context
     python-context-stdin <<EOF
-        source $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/usr/python/versions/$version/lib/create-virtenv
-        create-virtenv
-        EOF
+source $OPENSHIFT_IPYTHON_NOTEBOOK_DIR/usr/python/versions/$version/lib/create-virtenv
+create-virtenv
+EOF
 fi
