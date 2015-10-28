@@ -1,0 +1,1 @@
+export LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64
