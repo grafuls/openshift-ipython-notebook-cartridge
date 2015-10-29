@@ -5,4 +5,5 @@ jsonschema
 terminado
 virtualenv
 ipdb
+functools32
 ipython[notebook]
