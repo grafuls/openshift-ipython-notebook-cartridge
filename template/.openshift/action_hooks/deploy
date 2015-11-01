@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Executing action_hook/deploy"
+
 mkdir $OPENSHIFT_DATA_DIR/notebooks
 
 country=CZ
